@@ -9,6 +9,9 @@
 public abstract class CellValue {
 
   public static CellValue get(String value) {
+	if (value == null || value.trim().equals("")) {
+		return new SimpleValue("");
+	}
     if (value.replaceAll("[\\s]", "").matches("\\d+")) {
       //all numeric, return simple value
       return new SimpleValue(value);

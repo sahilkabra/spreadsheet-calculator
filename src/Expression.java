@@ -23,7 +23,7 @@ public class Expression {
         // Push a number on the stack
         stack.push(Double.parseDouble(element));
       } else {
-        if (stack.isEmpty()) throw invalidExpression;
+        if (stack.isEmpty() || stack.size() < 2) throw invalidExpression;
         Double value1 = stack.pop();
         Double value2 = stack.pop();
 

@@ -4,11 +4,11 @@
  * @author sahil
  */
 public class Cell {
-  public int evaluate(Sheet sheet) {
+  public int evaluate(Sheet sheet) throws CycleException {
     if (this.valueState == STATE.INPROGRESS) {
       this.value.setValue("Cycle detected");
       this.valueState = STATE.ERROR;
-      return 1; //CYCLE
+      throw new CycleException();
     }
     if (this.valueState == STATE.ERROR) {
       return 1;
@@ -31,9 +31,11 @@ public class Cell {
     if (this.valueState != STATE.EVALUATED) {
       //If the value for this cell has not yet been evaluated do it now
       evaluate(sheet);
-    } else if (this.valueState == STATE.ERROR || this.valueState == STATE.INPROGRESS) {
+    } 
+    if (this.valueState == STATE.ERROR || this.valueState == STATE.INPROGRESS) {
       throw new CycleException();
     }
+    if (this.value.getValue() == null) return "";
     return this.value.getValue().toString();
   }
 
