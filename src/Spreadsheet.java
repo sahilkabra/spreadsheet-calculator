@@ -22,45 +22,45 @@ import java.util.Scanner;
  */
 public class Spreadsheet {
 
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		List<String> lines = new ArrayList<String>();
-		while (sc.hasNext()) {
-			lines.add(sc.nextLine());
-		}
-		sc.close();
-		String[] linesArray = new String[lines.size()];
-		Sheet sheet = evaluate(lines.toArray(linesArray));
-		print(sheet);
-	}
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    List<String> lines = new ArrayList<String>();
+    while (sc.hasNext()) {
+      lines.add(sc.nextLine());
+    }
+    sc.close();
+    String[] linesArray = new String[lines.size()];
+    Sheet sheet = evaluate(lines.toArray(linesArray));
+    print(sheet);
+  }
 
-	/**
-	 * Evaluate the input that was received
-	 * 
-	 * @param lines
-	 */
-	public static Sheet evaluate(String[] lines) {
-		String[] sheetSpec = lines[0].split(" ");
-		Sheet sheet = new Sheet(Integer.parseInt(sheetSpec[1]),
-				Integer.parseInt(sheetSpec[0]));
+  /**
+   * Evaluate the input that was received
+   *
+   * @param lines
+   */
+  public static Sheet evaluate(String[] lines) {
+    String[] sheetSpec = lines[0].split(" ");
+    Sheet sheet = new Sheet(Integer.parseInt(sheetSpec[1]),
+        Integer.parseInt(sheetSpec[0]));
 
-		for (int lineNumber = 1; lineNumber < lines.length; lineNumber++) {
-			int row = (lineNumber - 1) / sheet.getCols();
-			int col = (lineNumber - 1) % sheet.getCols();
-			sheet.put(row, col, lines[lineNumber]);
-		}
-		// Go through all the cells again and evaluate cells
-		sheet.evaluate();
-		return sheet;
-	}
+    for (int lineNumber = 1; lineNumber < lines.length; lineNumber++) {
+      int row = (lineNumber - 1) / sheet.getCols();
+      int col = (lineNumber - 1) % sheet.getCols();
+      sheet.put(row, col, lines[lineNumber]);
+    }
+    // Go through all the cells again and evaluate cells
+    sheet.evaluate();
+    return sheet;
+  }
 
-	private static void print(Sheet sheet) {
-		System.out.println(sheet.getCols() + " " + sheet.getRows());
-		for (int row = 0; row < sheet.getRows(); row++) {
-			for (int col = 0; col < sheet.getCols(); col++) {
-				System.out.println(String.format("%.5f",
-						Double.valueOf(sheet.valueAt(row, col))));
-			}
-		}
-	}
+  private static void print(Sheet sheet) {
+    System.out.println(sheet.getCols() + " " + sheet.getRows());
+    for (int row = 0; row < sheet.getRows(); row++) {
+      for (int col = 0; col < sheet.getCols(); col++) {
+        System.out.println(String.format("%.5f",
+            Double.valueOf(sheet.valueAt(row, col))));
+      }
+    }
+  }
 }

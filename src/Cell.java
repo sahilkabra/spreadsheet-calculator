@@ -31,7 +31,7 @@ public class Cell {
     if (this.valueState != STATE.EVALUATED) {
       //If the value for this cell has not yet been evaluated do it now
       evaluate(sheet);
-    } 
+    }
     if (this.valueState == STATE.ERROR || this.valueState == STATE.INPROGRESS) {
       throw new CycleException();
     }

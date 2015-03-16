@@ -45,15 +45,15 @@ public class CompositeValue extends CellValue {
     // All the cell references have been replaced with numeric values now the value may be a number or an expression
 
     if (!referencesResolved.toString().trim().equals("")) {
-	    if (referencesResolved.toString().replaceAll("[\\s.]", "")
-		.matches("\\d+")) {
-	      // all numeric, return simple value
-	      this.value = Double.valueOf(referencesResolved.toString());
-	    } else {
-	      // we now have a postfix expression to evaluate
-	      this.value = Double.valueOf(Expression.evaluate(referencesResolved
-		  .toString().trim()));
-	    }
+      if (referencesResolved.toString().replaceAll("[\\s.]", "")
+    .matches("\\d+")) {
+        // all numeric, return simple value
+        this.value = Double.valueOf(referencesResolved.toString());
+      } else {
+        // we now have a postfix expression to evaluate
+        this.value = Double.valueOf(Expression.evaluate(referencesResolved
+      .toString().trim()));
+      }
     }
     return 0;
   }

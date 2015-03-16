@@ -13,7 +13,7 @@ public class SimpleValue extends CellValue {
 
   @Override
   public void setValue(String value) {
-	if (value == null || value.trim().equals("")) return;
+  if (value == null || value.trim().equals("")) return;
     this.setValue(Double.parseDouble(value));
   }
 
